@@ -1,8 +1,9 @@
+GRILL MASTERS
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>GRILL MASTERS - Luxury Digital Menu</title>
   
   <!-- Tailwind CSS -->
@@ -22,14 +23,14 @@
         extend: {
           colors: {
             brandGrey: {
-              light: '#2d2d30',
-              DEFAULT: '#1c1c1e',
-              dark: '#121214',
+              light: '#252528',
+              DEFAULT: '#18181a',
+              dark: '#0f0f10',
             },
             fireYellow: {
               light: '#FFE082',
               DEFAULT: '#FFB300',
-              dark: '#FF8F00',
+              dark: '#E69900',
               glow: '#FFC107'
             }
           },
@@ -39,9 +40,9 @@
             script: ['Playfair Display', 'serif']
           },
           boxShadow: {
-            luxuryGlow: '0 0 20px rgba(255, 179, 0, 0.15)',
-            fireGlow: '0 0 15px rgba(255, 143, 0, 0.4)',
-            modalGlow: '0 0 40px rgba(255, 179, 0, 0.3)'
+            luxuryGlow: '0 0 25px rgba(255, 179, 0, 0.12)',
+            fireGlow: '0 0 18px rgba(255, 143, 0, 0.35)',
+            modalGlow: '0 0 50px rgba(255, 179, 0, 0.25)'
           }
         }
       }
@@ -51,19 +52,19 @@
   <style>
     /* Premium Grey Wooden Background Texture using CSS Gradients & Noise */
     .grey-wood-bg {
-      background-color: #1a1a1c;
+      background-color: #161618;
       background-image: 
-        linear-gradient(rgba(28, 28, 30, 0.92), rgba(18, 18, 20, 0.96)),
-        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0,0,0,0.15) 40px, rgba(0,0,0,0.15) 80px),
+        linear-gradient(rgba(24, 24, 26, 0.94), rgba(15, 15, 16, 0.97)),
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0,0,0,0.18) 40px, rgba(0,0,0,0.18) 80px),
         linear-gradient(0deg, rgba(255,255,255,0.01) 50%, transparent 50%);
       background-size: cover, 120px 100%, 100% 4px;
     }
 
     .wood-heading-panel {
       background-image: 
-        linear-gradient(rgba(45, 45, 48, 0.85), rgba(28, 28, 30, 0.95)),
+        linear-gradient(rgba(45, 45, 48, 0.85), rgba(24, 24, 26, 0.96)),
         repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px);
-      box-shadow: inset 0 0 15px rgba(0,0,0,0.6), 0 4px 6px rgba(0,0,0,0.3);
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.6), 0 4px 6px rgba(0,0,0,0.4);
       border-left: 4px solid #FFB300;
     }
 
@@ -71,6 +72,7 @@
     ::-webkit-scrollbar {
       display: none;
     }
+    
     html, body {
       scrollbar-width: none;
       -ms-overflow-style: none;
@@ -79,9 +81,26 @@
       user-select: none;
     }
 
+    /* Elegant, highly modern page scroll customization */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      display: block;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 179, 0, 0.25);
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 179, 0, 0.5);
+    }
+
     /* 3D Book / Page Flip Transition Styles */
     .book-container {
-      perspective: 1800px;
+      perspective: 2000px;
       position: relative;
     }
 
@@ -92,1186 +111,1387 @@
       top: 0;
       left: 0;
       transform-style: preserve-3d;
-      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s, z-index 0s;
+      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s, z-index 0s;
       backface-visibility: hidden;
     }
 
-    /* Page positioning classes */
+    /* Custom 3D fold page transformations */
     .page-past {
-      transform: rotateY(-120deg);
+      transform: rotateY(-95deg) translateZ(50px);
       opacity: 0;
       z-index: 0;
       pointer-events: none;
     }
 
     .page-active {
-      transform: rotateY(0deg);
+      transform: rotateY(0deg) translateZ(0px);
       opacity: 1;
       z-index: 10;
       pointer-events: auto;
     }
 
     .page-future {
-      transform: rotateY(120deg);
+      transform: rotateY(95deg) translateZ(50px);
       opacity: 0;
       z-index: 0;
       pointer-events: none;
     }
 
-    /* Fire pulsing animation for stars & accents */
-    @keyframes fireGlowPulse {
-      0%, 100% { filter: drop-shadow(0 0 2px rgba(255, 179, 0, 0.4)); }
-      50% { filter: drop-shadow(0 0 8px rgba(255, 179, 0, 0.9)); }
+    /* Golden recommendations sparkle pulse */
+    @keyframes goldPulse {
+      0%, 100% { filter: drop-shadow(0 0 1px rgba(255, 179, 0, 0.4)); transform: scale(1); }
+      50% { filter: drop-shadow(0 0 6px rgba(255, 179, 0, 0.8)); transform: scale(1.15); }
     }
-    .fire-pulse {
-      animation: fireGlowPulse 2s infinite ease-in-out;
+    .gold-sparkle-pulse {
+      animation: goldPulse 2s infinite ease-in-out;
     }
 
     /* Sparkle Particle Canvas styling */
     #sparkleCanvas {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 999;
+      z-index: 9999;
     }
 
     /* 3:4 Special Offer modal layout */
     .special-offer-ratio {
       width: 90vw;
-      max-width: 380px;
+      max-width: 360px;
       aspect-ratio: 3/4;
     }
   </style>
 </head>
 <body class="bg-brandGrey-dark text-gray-200 font-body flex flex-col justify-between h-screen overflow-hidden">
 
-  <!-- Header Panel: Placed consistently at the top of the viewport -->
-  <header class="w-full bg-brandGrey-dark/90 backdrop-blur-md border-b border-white/5 py-2 px-4 flex justify-between items-center z-50">
-    <div class="text-[10px] sm:text-xs tracking-widest text-gray-400 font-luxury uppercase">
-      Created By <span class="text-fireYellow font-bold">Karan Digital Menu Agency</span>
+  <!-- Header Panel: Always visible at the very top of the website -->
+  <header class="w-full bg-brandGrey-dark/95 backdrop-blur-md border-b border-white/5 py-2 px-4 flex justify-between items-center z-50 select-none">
+    <div class="text-[10px] sm:text-xs tracking-[0.3em] text-gray-400 font-luxury uppercase">
+      Created By <span class="text-fireYellow font-bold tracking-widest">Karan Digital Menu Agency</span>
     </div>
     <!-- Simple Audio Controller Indicator -->
-    <button onclick="toggleAudioMute()" id="audioToggleBtn" class="text-xs text-fireYellow border border-fireYellow/30 px-2 py-0.5 rounded hover:bg-fireYellow/10 transition flex items-center gap-1.5">
+    <button onclick="toggleAudioMute()" id="audioToggleBtn" class="text-[10px] sm:text-xs text-fireYellow border border-fireYellow/30 px-2 py-0.5 rounded-full hover:bg-fireYellow/10 transition flex items-center gap-1.5 font-luxury tracking-widest">
       <i class="fa-solid fa-volume-high"></i> <span class="hidden sm:inline">ASMR ON</span>
     </button>
   </header>
 
-  <!-- Interactive Sparkles Canvas (Triggers on offer load) -->
+  <!-- Interactive Sparkles Canvas (Runs with the offer screen) -->
   <canvas id="sparkleCanvas"></canvas>
 
-  <!-- SPECIAL OFFER TEMPORARY MODAL (3:4 Ratio) -->
-  <div id="offerModalContainer" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 transition-all duration-300">
-    <div id="offerModalBox" class="special-offer-ratio bg-brandGrey-light/95 rounded-2xl border-2 border-fireYellow/60 shadow-modalGlow flex flex-col justify-between p-6 text-center transform scale-95 transition-transform duration-500 relative overflow-hidden grey-wood-bg">
+  <!-- SPECIAL OFFER TEMPORARY MODAL (3:4 Ratio, Semi-transparent with a gorgeous glow) -->
+  <div id="offerModalContainer" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[99999] flex items-center justify-center p-4 transition-all duration-500">
+    <div id="offerModalBox" class="special-offer-ratio bg-brandGrey-light/95 rounded-2xl border-2 border-fireYellow/50 shadow-modalGlow flex flex-col justify-between p-6 text-center transform scale-90 transition-all duration-500 relative overflow-hidden grey-wood-bg">
       
-      <!-- Decorative Corners -->
-      <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-fireYellow"></div>
-      <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-fireYellow"></div>
-      <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-fireYellow"></div>
-      <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-fireYellow"></div>
+      <!-- Inner Gold Accents -->
+      <div class="absolute top-2.5 left-2.5 w-6 h-6 border-t border-l border-fireYellow/40 rounded-tl"></div>
+      <div class="absolute top-2.5 right-2.5 w-6 h-6 border-t border-r border-fireYellow/40 rounded-tr"></div>
+      <div class="absolute bottom-2.5 left-2.5 w-6 h-6 border-b border-l border-fireYellow/40 rounded-bl"></div>
+      <div class="absolute bottom-2.5 right-2.5 w-6 h-6 border-b border-r border-fireYellow/40 rounded-br"></div>
 
-      <!-- Sparkle/Popper visual splash -->
+      <!-- Sparkle/Popper visual header -->
       <div class="mt-4">
-        <span class="text-[10px] tracking-widest text-fireYellow uppercase font-semibold">EXCLUSIVE PRIVILEGE</span>
-        <h2 id="offerTitle" class="text-3xl sm:text-4xl font-luxury font-black text-fireYellow tracking-wider mt-2 uppercase drop-shadow-lg">
+        <span class="text-[9px] tracking-[0.4em] text-fireYellow uppercase font-bold">EXCLUSIVE INVITATION</span>
+        <h2 id="offerTitle" class="text-3xl sm:text-4xl font-luxury font-black text-fireYellow tracking-widest mt-2 uppercase drop-shadow-lg">
           SPECIAL OFFER
         </h2>
-        <div class="w-12 h-0.5 bg-fireYellow mx-auto mt-4"></div>
+        <div class="w-16 h-[1px] bg-fireYellow/30 mx-auto mt-4"></div>
       </div>
 
-      <!-- Center interactive banner -->
-      <div class="my-auto flex flex-col items-center justify-center space-y-4">
-        <div class="p-4 rounded-full bg-fireYellow/10 border border-fireYellow/20 animate-pulse">
+      <!-- Interactive Gift Box Core -->
+      <div class="my-auto flex flex-col items-center justify-center space-y-4 z-10">
+        <div class="p-5 rounded-full bg-fireYellow/10 border border-fireYellow/20 animate-bounce">
           <i class="fa-solid fa-gift text-4xl text-fireYellow"></i>
         </div>
-        <p id="offerSubtitle" class="text-sm text-gray-300 font-medium px-4">
-          Tap the gold seal below to unveil your exclusive fine-dining treat for today.
+        <p id="offerSubtitle" class="text-xs text-gray-300 font-light tracking-wider leading-relaxed px-4">
+          Tap the luxurious seal below to claim your exclusive fine-dining privilege of the day.
         </p>
       </div>
 
-      <!-- Action Button / Trigger -->
-      <div class="mb-4">
-        <button id="offerTriggerBtn" class="w-full py-3 px-6 bg-gradient-to-r from-fireYellow-dark via-fireYellow to-fireYellow-dark text-black font-luxury font-black rounded-lg tracking-widest text-sm hover:brightness-110 active:scale-95 transition-all shadow-fireGlow uppercase">
+      <!-- Action Buttons -->
+      <div class="mb-4 z-10">
+        <button id="offerTriggerBtn" class="w-full py-3 px-6 bg-gradient-to-r from-fireYellow-dark via-fireYellow to-fireYellow-dark text-black font-luxury font-black rounded-lg tracking-[0.2em] text-xs hover:brightness-110 active:scale-95 transition-all shadow-fireGlow uppercase">
           REVEAL OFFER
         </button>
-        <p class="text-[10px] text-gray-500 mt-3 italic">Tap anywhere outside to explore the culinary menu</p>
+        <p class="text-[9px] text-gray-500 mt-3 uppercase tracking-widest">Tap anywhere outside to view menu</p>
       </div>
     </div>
   </div>
 
-  <!-- BOOK CONTAINER (No-scroll, page swipe/turn) -->
-  <main class="flex-grow w-full relative overflow-hidden book-container px-3 py-1 md:py-3 max-w-7xl mx-auto flex items-center">
+  <!-- BOOK CONTAINER (Touch swipe right-to-left/left-to-right to turn) -->
+  <main class="flex-grow w-full relative overflow-hidden book-container px-3 py-4 max-w-7xl mx-auto flex items-center">
     
     <!-- PAGE 1: COVER PAGE -->
-    <div id="page-1" class="menu-page page-active flex flex-col justify-between h-full py-4">
+    <div id="page-1" class="menu-page page-active flex flex-col justify-between h-full py-2">
       <div class="flex-grow flex flex-col items-center justify-center text-center space-y-6">
-        <!-- Main Elegant Frame -->
-        <div class="border border-fireYellow/30 p-4 sm:p-8 rounded-xl max-w-lg w-full bg-black/30 backdrop-blur-sm relative shadow-luxuryGlow">
+        
+        <div class="border border-fireYellow/20 p-6 sm:p-10 rounded-2xl max-w-lg w-full bg-zinc-900/60 backdrop-blur-md relative shadow-luxuryGlow">
+          <!-- Inner Border Frame -->
+          <div class="absolute inset-2 border border-fireYellow/10 rounded-xl pointer-events-none"></div>
+
           <!-- Logo Image 1 -->
-          <div class="mb-4 flex justify-center">
-            <img src="https://i.ibb.co/bgndD7hK/Screenshot-20260518-144001-Chrome.jpg" alt="Grill Masters Primary Logo" class="h-28 sm:h-36 object-contain rounded-lg border border-fireYellow/20 shadow-md" onerror="this.src='https://placehold.co/400?text=GRILL+MASTERS'"/>
+          <div class="mb-6 flex justify-center">
+            <img src="https://i.ibb.co/bgndD7hK/Screenshot-20260518-144001-Chrome.jpg" alt="Grill Masters Primary Logo" class="h-32 sm:h-40 object-contain rounded-lg border border-fireYellow/20 shadow-lg" onerror="this.src='https://placehold.co/400?text=GRILL+MASTERS'"/>
           </div>
 
           <!-- Tagline below primary logo -->
-          <p class="text-[10px] sm:text-xs text-fireYellow tracking-[0.25em] font-bold font-luxury text-center uppercase my-2">
+          <p class="text-[10px] sm:text-xs text-fireYellow tracking-[0.3em] font-bold font-luxury text-center uppercase my-4">
             TASTE AND HEALTH WRAPPED TOGETHER
           </p>
 
-          <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-fireYellow to-transparent mx-auto my-6"></div>
+          <div class="w-32 h-[1px] bg-gradient-to-r from-transparent via-fireYellow/40 to-transparent mx-auto my-6"></div>
 
           <!-- Second Logo Image -->
-          <div class="mb-4 flex justify-center">
-            <img src="https://i.ibb.co/84bMbV7S/Screenshot-20260429-174505-Gallery.jpg" alt="Grill Masters Decorative Seal" class="h-16 sm:h-20 object-contain rounded-full border border-fireYellow/40 p-1 bg-brandGrey-dark" onerror="this.style.display='none'"/>
+          <div class="mb-6 flex justify-center">
+            <img src="https://i.ibb.co/84bMbV7S/Screenshot-20260429-174505-Gallery.jpg" alt="Grill Masters Decorative Seal" class="h-20 sm:h-24 object-contain rounded-full border border-fireYellow/30 p-1 bg-brandGrey-dark" onerror="this.style.display='none'"/>
           </div>
 
-          <!-- Interactive navigation helper -->
-          <div class="mt-8 pt-4 border-t border-white/5">
+          <!-- Swipe navigation instruction helper -->
+          <div class="mt-8 pt-4 border-t border-white/5 select-none">
             <div class="flex items-center justify-center gap-3 text-xs text-gray-400">
-              <span class="animate-bounce-horizontal"><i class="fa-solid fa-chevron-left text-fireYellow"></i></span>
-              <span class="uppercase tracking-widest font-luxury text-[11px]">Swipe or Click Arrow to Turn</span>
-              <span class="animate-bounce-horizontal-right"><i class="fa-solid fa-chevron-right text-fireYellow"></i></span>
+              <span class="animate-pulse"><i class="fa-solid fa-chevron-left text-fireYellow"></i></span>
+              <span class="uppercase tracking-[0.3em] font-luxury text-[10px]">Swipe or Click Arrow below to explore</span>
+              <span class="animate-pulse"><i class="fa-solid fa-chevron-right text-fireYellow"></i></span>
             </div>
           </div>
         </div>
+
       </div>
     </div>
 
     <!-- PAGE 2: PIZZAS & ADD-ONS -->
     <div id="page-2" class="menu-page page-future flex flex-col justify-between h-full py-2">
-      <div class="flex-grow overflow-y-auto pr-1 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 items-start">
+      <div class="flex-grow overflow-y-auto custom-scrollbar pr-1 space-y-6">
         
-        <!-- Left Column: Veg Pizzas -->
-        <div class="space-y-4">
-          <!-- Main Category Block -->
-          <div class="wood-heading-panel p-2.5 rounded-r flex items-center justify-between">
-            <h2 class="text-xl sm:text-2xl font-luxury font-black text-fireYellow tracking-wider">PIZZA / VEG PIZZA</h2>
-            <div class="flex gap-4 text-xs font-bold text-gray-300 pr-2">
+        <!-- Category: PIZZA / VEG PIZZA -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r flex items-center justify-between mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">VEG PIZZA</h2>
+            <div class="flex gap-10 text-[10px] font-luxury tracking-widest text-gray-400 pr-3">
               <span>R</span>
               <span>M</span>
             </div>
           </div>
 
           <div class="space-y-2">
-            <!-- Cheese Margherita -->
-            <div class="flex justify-between items-baseline group p-1.5 hover:bg-white/5 rounded transition">
-              <div class="flex-grow pr-4">
-                <span class="font-luxury font-bold text-sm tracking-wide text-white">Cheese Margherita</span>
-              </div>
-              <div class="font-bold text-xs sm:text-sm text-fireYellow whitespace-nowrap flex gap-4">
-                <span class="w-8 text-right">₹170</span>
-                <span class="w-8 text-right">₹310</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Cheese Margherita</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <div class="font-semibold text-xs sm:text-sm text-fireYellow flex gap-8">
+                <span class="w-10 text-right">₹170</span>
+                <span class="w-10 text-right">₹310</span>
               </div>
             </div>
-            <!-- Veggie Garden -->
-            <div class="flex justify-between items-baseline group p-1.5 hover:bg-white/5 rounded transition">
-              <div class="flex-grow pr-4">
-                <span class="font-luxury font-bold text-sm tracking-wide text-white">Veggie Garden</span>
-              </div>
-              <div class="font-bold text-xs sm:text-sm text-fireYellow whitespace-nowrap flex gap-4">
-                <span class="w-8 text-right">₹170</span>
-                <span class="w-8 text-right">₹310</span>
-              </div>
-            </div>
-            <!-- Sweet Corn Treat -->
-            <div class="flex justify-between items-baseline group p-1.5 hover:bg-white/5 rounded transition">
-              <div class="flex-grow pr-4">
-                <span class="font-luxury font-bold text-sm tracking-wide text-white">Sweet Corn Treat <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              </div>
-              <div class="font-bold text-xs sm:text-sm text-fireYellow whitespace-nowrap flex gap-4">
-                <span class="w-8 text-right">₹170</span>
-                <span class="w-8 text-right">₹310</span>
-              </div>
-            </div>
-            <!-- Farm Fresh -->
-            <div class="flex justify-between items-baseline group p-1.5 hover:bg-white/5 rounded transition">
-              <div class="flex-grow pr-4">
-                <span class="font-luxury font-bold text-sm tracking-wide text-white">Farm Fresh</span>
-              </div>
-              <div class="font-bold text-xs sm:text-sm text-fireYellow whitespace-nowrap flex gap-4">
-                <span class="w-8 text-right">₹200</span>
-                <span class="w-8 text-right">₹330</span>
-              </div>
-            </div>
-            <!-- Paneer Bingo -->
-            <div class="flex justify-between items-baseline group p-1.5 hover:bg-white/5 rounded transition">
-              <div class="flex-grow pr-4">
-                <span class="font-luxury font-bold text-sm tracking-wide text-white">Paneer Bingo <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              </div>
-              <div class="font-bold text-xs sm:text-sm text-fireYellow whitespace-nowrap flex gap-4">
-                <span class="w-8 text-right">₹200</span>
-                <span class="w-8 text-right">₹330</span>
-              </div>
-            </div>
-            <!-- Paneer Tikka -->
-            <div class="flex justify-between items-baseline group p-1.5 hover:bg-white/5 rounded transition">
-              <div class="flex-grow pr-4">
-                <span class="font-luxury font-bold text-sm tracking-wide text-white">Paneer Tikka</span>
-              </div>
-              <div class="font-bold text-xs sm:text-sm text-fireYellow whitespace-nowrap flex gap-4">
-                <span class="w-8 text-right">₹240</span>
-                <span class="w-8 text-right">₹390</span>
-              </div>
-            </div>
-            <!-- Punjabi Paneer Pizza -->
-            <div class="flex justify-between items-baseline group p-1.5 hover:bg-white/5 rounded transition">
-              <div class="flex-grow pr-4">
-                <span class="font-luxury font-bold text-sm tracking-wide text-white">Punjabi Paneer Pizza <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              </div>
-              <div class="font-bold text-xs sm:text-sm text-fireYellow whitespace-nowrap flex gap-4">
-                <span class="w-8 text-right">₹240</span>
-                <span class="w-8 text-right">₹390</span>
-              </div>
-            </div>
-            <!-- GRILL'S SPECIAL -->
-            <div class="flex justify-between items-baseline group p-1.5 hover:bg-white/5 rounded transition">
-              <div class="flex-grow pr-4">
-                <span class="font-luxury font-bold text-sm tracking-wide text-white">GRILL 'S SPECIAL</span>
-              </div>
-              <div class="font-bold text-xs sm:text-sm text-fireYellow whitespace-nowrap flex gap-4">
-                <span class="w-8 text-right">₹240</span>
-                <span class="w-8 text-right">₹390</span>
-              </div>
-            </div>
-          </div>
 
-          <!-- Non-Veg Pizza Block -->
-          <div class="wood-heading-panel p-2.5 rounded-r flex items-center justify-between mt-4">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">NON-VEG PIZZA</h2>
-            <div class="flex gap-4 text-xs font-bold text-gray-300 pr-2">
-              <span>R</span>
-              <span>M</span>
-            </div>
-          </div>
-          <div class="space-y-2">
             <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Grilled Chicken Pizza</span>
-              <div class="font-bold text-xs sm:text-sm text-fireYellow flex gap-4">
-                <span class="w-8 text-right">₹250</span>
-                <span class="w-8 text-right">₹420</span>
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Veggie Garden</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <div class="font-semibold text-xs sm:text-sm text-fireYellow flex gap-8">
+                <span class="w-10 text-right">₹170</span>
+                <span class="w-10 text-right">₹310</span>
               </div>
             </div>
+
             <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Peri Peri Chicken Pizza <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <div class="font-bold text-xs sm:text-sm text-fireYellow flex gap-4">
-                <span class="w-8 text-right">₹280</span>
-                <span class="w-8 text-right">₹450</span>
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Sweet Corn Treat <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <div class="font-semibold text-xs sm:text-sm text-fireYellow flex gap-8">
+                <span class="w-10 text-right">₹170</span>
+                <span class="w-10 text-right">₹310</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Farm Fresh</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <div class="font-semibold text-xs sm:text-sm text-fireYellow flex gap-8">
+                <span class="w-10 text-right">₹200</span>
+                <span class="w-10 text-right">₹330</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Bingo <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <div class="font-semibold text-xs sm:text-sm text-fireYellow flex gap-8">
+                <span class="w-10 text-right">₹200</span>
+                <span class="w-10 text-right">₹330</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Tikka</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <div class="font-semibold text-xs sm:text-sm text-fireYellow flex gap-8">
+                <span class="w-10 text-right">₹240</span>
+                <span class="w-10 text-right">₹390</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Punjabi Paneer Pizza <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <div class="font-semibold text-xs sm:text-sm text-fireYellow flex gap-8">
+                <span class="w-10 text-right">₹240</span>
+                <span class="w-10 text-right">₹390</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">GRILL 'S SPECIAL</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <div class="font-semibold text-xs sm:text-sm text-fireYellow flex gap-8">
+                <span class="w-10 text-right">₹240</span>
+                <span class="w-10 text-right">₹390</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Right Column: Thin Crust, Singles & Addons -->
-        <div class="space-y-4">
-          <!-- Thin Crust Pizza Section -->
-          <div class="wood-heading-panel p-2.5 rounded-r">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">THIN CRUST PIZZA</h2>
+        <!-- Category: THIN CRUST PIZZA -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">THIN CRUST PIZZA</h2>
           </div>
-          <div class="space-y-2">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Mushroom Pizza</span>
-              <span class="font-bold text-sm text-fireYellow">₹390</span>
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Mushroom Pizza</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹390</span>
             </div>
             <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Peri Peri Paneer Pizza</span>
-              <span class="font-bold text-sm text-fireYellow">₹390</span>
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Peri Peri Paneer Pizza</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹390</span>
             </div>
             <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Veggie Monster Pizza</span>
-              <span class="font-bold text-sm text-fireYellow">₹390</span>
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Veggie Monster Pizza</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹390</span>
             </div>
           </div>
+        </div>
 
-          <!-- Classic Singles Section -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-4">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">CLASSIC SINGLES</h2>
+        <!-- Category: CLASSIC SINGLES -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">CLASSIC SINGLES</h2>
           </div>
-          <div class="space-y-2">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Onion Pizza</span>
-              <span class="font-bold text-sm text-fireYellow">₹80</span>
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Onion Pizza</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹80</span>
             </div>
             <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Corn Pizza</span>
-              <span class="font-bold text-sm text-fireYellow">₹80</span>
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Corn Pizza</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹80</span>
             </div>
             <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Paneer Pizza <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹100</span>
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Pizza <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹100</span>
             </div>
           </div>
+        </div>
 
-          <!-- Add-Ons Section -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-4 flex justify-between items-center">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">ADD-ONS</h2>
-            <div class="flex gap-4 text-xs font-bold text-gray-300 pr-2">
+        <!-- Category: ADD-ONS -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r flex items-center justify-between mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">ADD-ONS</h2>
+            <div class="flex gap-10 text-[10px] font-luxury tracking-widest text-gray-400 pr-3">
               <span>R</span>
               <span>M</span>
             </div>
           </div>
           <div class="space-y-2">
             <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Any Topping</span>
-              <div class="font-bold text-xs sm:text-sm text-fireYellow flex gap-4">
-                <span class="w-8 text-right">₹20</span>
-                <span class="w-8 text-right">₹30</span>
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Any Topping</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <div class="font-semibold text-xs sm:text-sm text-fireYellow flex gap-8">
+                <span class="w-10 text-right">₹20</span>
+                <span class="w-10 text-right">₹30</span>
               </div>
             </div>
             <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Extra Cheese</span>
-              <div class="font-bold text-xs sm:text-sm text-fireYellow flex gap-4">
-                <span class="w-8 text-right">₹30</span>
-                <span class="w-8 text-right">₹50</span>
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Extra Cheese</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <div class="font-semibold text-xs sm:text-sm text-fireYellow flex gap-8">
+                <span class="w-10 text-right">₹30</span>
+                <span class="w-10 text-right">₹50</span>
               </div>
             </div>
             <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Cheese Burst Base</span>
-              <div class="font-bold text-xs sm:text-sm text-fireYellow flex gap-4">
-                <span class="w-8 text-right">₹60</span>
-                <span class="w-8 text-right">₹90</span>
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Cheese Burst Base</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <div class="font-semibold text-xs sm:text-sm text-fireYellow flex gap-8">
+                <span class="w-10 text-right">₹60</span>
+                <span class="w-10 text-right">₹90</span>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Category: NON-VEG PIZZA -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r flex items-center justify-between mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">NON-VEG PIZZA</h2>
+            <div class="flex gap-10 text-[10px] font-luxury tracking-widest text-gray-400 pr-3">
+              <span>R</span>
+              <span>M</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Grilled Chicken Pizza</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <div class="font-semibold text-xs sm:text-sm text-fireYellow flex gap-8">
+                <span class="w-10 text-right">₹250</span>
+                <span class="w-10 text-right">₹420</span>
+              </div>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Peri Peri Chicken Pizza <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <div class="font-semibold text-xs sm:text-sm text-fireYellow flex gap-8">
+                <span class="w-10 text-right">₹280</span>
+                <span class="w-10 text-right">₹450</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Universal Feedback Card Mapped inside the end of scroll viewport -->
+        <div class="universal-feedback-block"></div>
 
       </div>
     </div>
 
     <!-- PAGE 3: BURGERS, TACOS, GARLIC BREAD & NOODLES -->
     <div id="page-3" class="menu-page page-future flex flex-col justify-between h-full py-2">
-      <div class="flex-grow overflow-y-auto pr-1 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 items-start">
+      <div class="flex-grow overflow-y-auto custom-scrollbar pr-1 space-y-6">
         
-        <!-- Left Column: Veg Burgers & Non-Veg Burgers -->
-        <div class="space-y-4">
-          <!-- Veg Burger Section -->
-          <div class="wood-heading-panel p-2.5 rounded-r flex items-center justify-between">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">VEG BURGER</h2>
-            <div class="flex gap-2 text-[10px] font-bold text-gray-300 pr-2">
-              <span>REG</span>
-              <span>WHEAT</span>
+        <!-- Category: VEG BURGER -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r flex items-center justify-between mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">VEG BURGER</h2>
+            <div class="flex gap-4 text-[9px] font-luxury tracking-widest text-gray-400 pr-3">
+              <span>REG.</span>
+              <span>W. WHEAT</span>
             </div>
           </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Junior</span>
-              <span class="font-bold text-sm text-fireYellow">₹60/70</span>
+          <div class="space-y-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Junior</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹60/70</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">TEXAS <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹80/90</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">TEXAS <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹80/90</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Creamy Burger <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹80/90</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Creamy Burger <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹80/90</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Chana Patty Burger</span>
-              <span class="font-bold text-sm text-fireYellow">₹80/90</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Chana Patty Burger</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹80/90</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">American Burger</span>
-              <span class="font-bold text-sm text-fireYellow">₹90/100</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">American Burger</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹90/100</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Paneer Crisp <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹100/110</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Crisp <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹100/110</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Giga Bite <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹110/120</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Giga Bite <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹110/120</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Texas Paneer <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹110/120</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Texas Paneer <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹110/120</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Paneer Makhani Burger</span>
-              <span class="font-bold text-sm text-fireYellow">₹120/130</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Makhani Burger</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹120/130</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Paneer Veg Mountain</span>
-              <span class="font-bold text-sm text-fireYellow">₹150/160</span>
-            </div>
-          </div>
-
-          <!-- Non-Veg Burgers Section -->
-          <div class="wood-heading-panel p-2.5 rounded-r flex items-center justify-between mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">NON-VEG BURGERS</h2>
-            <div class="flex gap-2 text-[10px] font-bold text-gray-300 pr-2">
-              <span>REG</span>
-              <span>WHEAT</span>
-            </div>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Compact Burger</span>
-              <span class="font-bold text-sm text-fireYellow">₹80/90</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Bad Boy</span>
-              <span class="font-bold text-sm text-fireYellow">₹100/110</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Big Devil</span>
-              <span class="font-bold text-sm text-fireYellow">₹120/130</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Illeagle Burger</span>
-              <span class="font-bold text-sm text-fireYellow">₹130/140</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Grilled Chicken Burger <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹150/160</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Chicken Mountain Burger</span>
-              <span class="font-bold text-sm text-fireYellow">₹170/180</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Veg Mountain</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹150/160</span>
             </div>
           </div>
         </div>
 
-        <!-- Right Column: Tacos, Garlic Bread & Noodles -->
-        <div class="space-y-4">
-          <!-- Taco Section -->
-          <div class="wood-heading-panel p-2.5 rounded-r">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">TACO</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Veggie Taco</span>
-              <span class="font-bold text-sm text-fireYellow">₹110</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Paneer Taco</span>
-              <span class="font-bold text-sm text-fireYellow">₹130</span>
+        <!-- Category: NON-VEG BURGERS -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r flex items-center justify-between mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">NON-VEG BURGERS</h2>
+            <div class="flex gap-4 text-[9px] font-luxury tracking-widest text-gray-400 pr-3">
+              <span>REG.</span>
+              <span>W. WHEAT</span>
             </div>
           </div>
-
-          <!-- Garlic Bread Section -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">GARLIC BREAD</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Garlic Breadsticks</span>
-              <span class="font-bold text-sm text-fireYellow">₹80</span>
+          <div class="space-y-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Compact Burger</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹80/90</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Cheese Garlic Bread <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹120</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Bad Boy</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹100/110</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Exotic Garlic Bread</span>
-              <span class="font-bold text-sm text-fireYellow">₹130</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Big Devil</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹120/130</span>
             </div>
-          </div>
-
-          <!-- Noodles Section -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">NOODLES</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Desi Chowmein <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹120</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Illeagle Burger</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹130/140</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Veg Noodles</span>
-              <span class="font-bold text-sm text-fireYellow">₹120</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Grilled Chicken Burger <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹150/160</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Hakka Noodles</span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Paneer Noodles <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Mirchi Noodles</span>
-              <span class="font-bold text-sm text-fireYellow">₹160</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Dragon Special Noodles <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹170</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Chicken Mountain Burger</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹170/180</span>
             </div>
           </div>
         </div>
+
+        <!-- Category: TACO -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">TACO</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Veggie Taco</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹110</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Taco</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹130</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: GARLIC BREAD -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">GARLIC BREAD</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Garlic Breadsticks</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹80</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Cheese Garlic Bread <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹120</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Exotic Garlic Bread</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹130</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: NOODLES -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">NOODLES</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Desi Chowmein <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹120</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Veg Noodles</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹120</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Hakka Noodles</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Noodles <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Mirchi Noodles</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹160</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Dragon Special Noodles <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹170</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="universal-feedback-block"></div>
 
       </div>
     </div>
 
     <!-- PAGE 4: WRAPS, BRUSCHETTA, NACHOS, SPRING ROLLS, SOUPS & SUBS -->
     <div id="page-4" class="menu-page page-future flex flex-col justify-between h-full py-2">
-      <div class="flex-grow overflow-y-auto pr-1 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 items-start">
+      <div class="flex-grow overflow-y-auto custom-scrollbar pr-1 space-y-6">
         
-        <!-- Left Column: Wraps & Bruschetta -->
-        <div class="space-y-4">
-          <!-- Veg Wraps -->
-          <div class="wood-heading-panel p-2.5 rounded-r flex items-center justify-between">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">VEG WRAPS</h2>
-            <div class="flex gap-2 text-[10px] font-bold text-gray-300 pr-2">
-              <span>REG</span>
-              <span>WHEAT</span>
+        <!-- Category: VEG WRAPS -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r flex items-center justify-between mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">VEG WRAPS</h2>
+            <div class="flex gap-4 text-[9px] font-luxury tracking-widest text-gray-400 pr-3">
+              <span>REG.</span>
+              <span>W. WHEAT</span>
             </div>
           </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Veg Wrap</span>
-              <span class="font-bold text-sm text-fireYellow">₹120/130</span>
+          <div class="space-y-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Veg Wrap</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹120/130</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Chana Patty Wrap</span>
-              <span class="font-bold text-sm text-fireYellow">₹120/130</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Chana Patty Wrap</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹120/130</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Mexican Tortilla <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹130/140</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Mexican Tortilla <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹130/140</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Hara Bhara Kebab Wrap <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹140/150</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Hara Bhara Kebab Wrap <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹140/150</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Crunchy Paneer Wrap <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹140/150</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Crunchy Paneer Wrap <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹140/150</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Grilled Paneer Wrap</span>
-              <span class="font-bold text-sm text-fireYellow">₹150/160</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Grilled Paneer Wrap</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹150/160</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Peri Peri Paneer Wrap <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹150/160</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Peri Peri Paneer Wrap <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹150/160</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Paneer Makhani Wrap</span>
-              <span class="font-bold text-sm text-fireYellow">₹150/160</span>
-            </div>
-          </div>
-
-          <!-- Non-Veg Wraps -->
-          <div class="wood-heading-panel p-2.5 rounded-r flex items-center justify-between mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">NON-VEG WRAPS</h2>
-            <div class="flex gap-2 text-[10px] font-bold text-gray-300 pr-2">
-              <span>REG</span>
-              <span>WHEAT</span>
-            </div>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Grilled Chicken Wrap</span>
-              <span class="font-bold text-sm text-fireYellow">₹140/150</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Chicken Makhani wrap</span>
-              <span class="font-bold text-sm text-fireYellow">₹150/160</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Chicken Tikka Wrap <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹160/170</span>
-            </div>
-          </div>
-
-          <!-- Bruschetta -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">BRUSCHETTA</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Cheese Bruschetta</span>
-              <span class="font-bold text-sm text-fireYellow">₹120</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Corn & Mushroom Bruschetta</span>
-              <span class="font-bold text-sm text-fireYellow">₹130</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Makhani Wrap</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹150/160</span>
             </div>
           </div>
         </div>
 
-        <!-- Right Column: Nachos, Spring Rolls, Soups, Subs -->
-        <div class="space-y-4">
-          <!-- Nachos -->
-          <div class="wood-heading-panel p-2.5 rounded-r">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">NACHOS</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Makhani Nachos</span>
-              <span class="font-bold text-sm text-fireYellow">₹120</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Baked Makhani Nachos</span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Mexican Nachos <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹120</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Baked Mexican Nachos</span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
+        <!-- Category: NON-VEG WRAPS -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r flex items-center justify-between mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">NON-VEG WRAPS</h2>
+            <div class="flex gap-4 text-[9px] font-luxury tracking-widest text-gray-400 pr-3">
+              <span>REG.</span>
+              <span>W. WHEAT</span>
             </div>
           </div>
-
-          <!-- Spring Rolls -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">SPRING ROLLS</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Veg Spring Rolls <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹130</span>
+          <div class="space-y-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Grilled Chicken Wrap</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹140/150</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Veg Kurkure Spring Rolls <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Chicken Makhani wrap</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹150/160</span>
             </div>
-          </div>
-
-          <!-- Soups -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">SOUPS</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Veg Manchow Soup <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹80</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Sweet & Sour Soup</span>
-              <span class="font-bold text-sm text-fireYellow">₹80</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Mushroom & Corn Soup</span>
-              <span class="font-bold text-sm text-fireYellow">₹80</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Hot & Sour Soup</span>
-              <span class="font-bold text-sm text-fireYellow">₹80</span>
-            </div>
-          </div>
-
-          <!-- Subs Section -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">SUBS</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Veg Sub</span>
-              <span class="font-bold text-sm text-fireYellow">₹140</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Crunchy Paneer Sub <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹160</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Grilled Paneer Sub</span>
-              <span class="font-bold text-sm text-fireYellow">₹160</span>
-            </div>
-          </div>
-
-          <!-- Non-Veg Subs Section -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">NON VEG. SUBS</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Grilled Chicken Sub</span>
-              <span class="font-bold text-sm text-fireYellow">₹160</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Makhani Chicken Sub</span>
-              <span class="font-bold text-sm text-fireYellow">₹170</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Chicken Tikka Wrap <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹160/170</span>
             </div>
           </div>
         </div>
+
+        <!-- Category: BRUSCHETTA -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">BRUSCHETTA</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Cheese Bruschetta</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹120</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Corn & Mushroom Bruschetta</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹130</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: NACHOS -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">NACHOS</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Makhani Nachos</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹120</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Baked Makhani Nachos</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Mexican Nachos <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹120</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Baked Mexican Nachos</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: SPRING ROLLS -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">SPRING ROLLS</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Veg Spring Rolls <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹130</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Veg Kurkure Spring Rolls <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: SOUPS -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">SOUPS</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Veg Manchow Soup <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹80</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Sweet & Sour Soup</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹80</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Mushroom & Corn Soup</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹80</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Hot & Sour Soup</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹80</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: SUBS -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">SUBS</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Veg Sub</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹140</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Crunchy Paneer Sub <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹160</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Grilled Paneer Sub</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹160</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: NON VEG SUBS -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">NON VEG. SUBS</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Grilled Chicken Sub</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹160</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Makhani Chicken Sub</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹170</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="universal-feedback-block"></div>
 
       </div>
     </div>
 
     <!-- PAGE 5: SANDWICHES, PASTA, SIDES, FRIED RICE & SALADS -->
     <div id="page-5" class="menu-page page-future flex flex-col justify-between h-full py-2">
-      <div class="flex-grow overflow-y-auto pr-1 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 items-start">
+      <div class="flex-grow overflow-y-auto custom-scrollbar pr-1 space-y-6">
         
-        <!-- Left Column: Sandwiches & Pasta -->
-        <div class="space-y-4">
-          <!-- Veg Sandwiches -->
-          <div class="wood-heading-panel p-2.5 rounded-r">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">VEG GRILLED SANDWICHES</h2>
+        <!-- Category: VEG GRILLED SANDWICHES -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">VEG GRILLED SANDWICHES</h2>
           </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Veg & Cheese Sandwich</span>
-              <span class="font-bold text-sm text-fireYellow">₹100</span>
+          <div class="space-y-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Veg & Cheese Sandwich</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹100</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Cheesy corn <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹120</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Cheesy corn <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹120</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Mexican Wave</span>
-              <span class="font-bold text-sm text-fireYellow">₹130</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Mexican Wave</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹130</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Mushroom Corn <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Mushroom Corn <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Paneer Tikka Sandwich</span>
-              <span class="font-bold text-sm text-fireYellow">₹160</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Tikka Sandwich</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹160</span>
             </div>
           </div>
+        </div>
 
-          <!-- Non-Veg Sandwiches -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">NON-VEG GRILLED SANDWICHES</h2>
+        <!-- Category: NON-VEG GRILLED SANDWICHES -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">NON-VEG GRILLED SANDWICHES</h2>
           </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Grilled Chicken Sandwich</span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
+          <div class="space-y-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Grilled Chicken Sandwich</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Makhani Chicken Sandwich <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹170</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Makhani Chicken Sandwich <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹170</span>
             </div>
           </div>
+        </div>
 
-          <!-- Pasta La Vista -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3 flex flex-col">
+        <!-- Category: PASTA-LA-VISTA -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r flex flex-col mb-4">
             <div class="flex justify-between items-center w-full">
-              <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">PASTA-LA-VISTA</h2>
-              <div class="flex gap-2 text-[10px] font-bold text-gray-300 pr-2">
-                <span>REG</span>
+              <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">PASTA-LA-VISTA</h2>
+              <div class="flex gap-4 text-[9px] font-luxury tracking-widest text-gray-400 pr-3">
+                <span>REG.</span>
                 <span>BAKED</span>
               </div>
             </div>
-            <span class="text-[10px] text-fireYellow italic mt-0.5">(Served with Garlic Bread)</span>
+            <span class="text-[9px] text-fireYellow tracking-widest uppercase italic mt-0.5">(Served with Garlic Bread)</span>
           </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">White Sauce Pasta <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹160/190</span>
+          <div class="space-y-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">White Sauce Pasta <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹160/190</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Red Sauce Pasta <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹160/190</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Red Sauce Pasta <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹160/190</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Mix Sauce Pasta</span>
-              <span class="font-bold text-sm text-fireYellow">₹170/200</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Mix Sauce Pasta</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹170/200</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Tandoori Pasta</span>
-              <span class="font-bold text-sm text-fireYellow">₹170/200</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Tandoori Pasta</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹170/200</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Makhani Pasta</span>
-              <span class="font-bold text-sm text-fireYellow">₹170/200</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Makhani Pasta</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow font-luxury">₹170/200</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: SIDES -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">SIDES</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Classic Fries</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹80</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Peri Peri Fries <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹100</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Bombay Fries <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹110</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Hara Bhara Kebab</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹120</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Cheese Loaded Fries</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹130</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Peri Peri Cheese Loaded Fries</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹140</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Bombay Cheese Loaded Fries</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹140</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Chicken Nuggets</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
             </div>
           </div>
         </div>
 
-        <!-- Right Column: Sides, Fried Rice & Salads -->
-        <div class="space-y-4">
-          <!-- Sides -->
-          <div class="wood-heading-panel p-2.5 rounded-r">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">SIDES</h2>
+        <!-- Category: FRIED RICE -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">FRIED RICE</h2>
           </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Classic Fries</span>
-              <span class="font-bold text-sm text-fireYellow">₹80</span>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Veg Fried Rice <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹130</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Peri Peri Fries <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹100</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Fried Rice</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Bombay Fries <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹110</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Chilly Garlic Fried Rice <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹160</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Hara Bhara Kebab</span>
-              <span class="font-bold text-sm text-fireYellow">₹120</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Cheese Loaded Fries</span>
-              <span class="font-bold text-sm text-fireYellow">₹130</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Peri Peri Cheese Loaded Fries</span>
-              <span class="font-bold text-sm text-fireYellow">₹140</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Bombay Cheese Loaded Fries</span>
-              <span class="font-bold text-sm text-fireYellow">₹140</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Chicken Nuggets</span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
-            </div>
-          </div>
-
-          <!-- Fried Rice -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">FRIED RICE</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Veg Fried Rice <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹130</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Paneer Fried Rice</span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Paneer Chilly Garlic Fried Rice <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹160</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Dragon Special Fried Rice</span>
-              <span class="font-bold text-sm text-fireYellow">₹170</span>
-            </div>
-          </div>
-
-          <!-- Salads -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">SALADS</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Veg Crunch Salad <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹130</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Veg Gym Diet</span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Grilled Paneer Salad</span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Paneer Crunch Salad <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹160</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Chicken Gym Diet <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹160</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Grilled Chicken Salad <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹170</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Dragon Special Fried Rice</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹170</span>
             </div>
           </div>
         </div>
+
+        <!-- Category: SALADS -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">SALADS</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Veg Crunch Salad <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹130</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Veg Gym Diet</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Grilled Paneer Salad</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Crunch Salad <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹160</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Chicken Gym Diet <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹160</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Grilled Chicken Salad <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹170</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="universal-feedback-block"></div>
 
       </div>
     </div>
 
     <!-- PAGE 6: STARTERS, DESSERTS & EXQUISITE BEVERAGES -->
     <div id="page-6" class="menu-page page-future flex flex-col justify-between h-full py-2">
-      <div class="flex-grow overflow-y-auto pr-1 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 items-start">
+      <div class="flex-grow overflow-y-auto custom-scrollbar pr-1 space-y-6">
         
-        <!-- Left Column: Starters, Desserts & Hot Coffee -->
-        <div class="space-y-4">
-          <!-- Starters -->
-          <div class="wood-heading-panel p-2.5 rounded-r">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">STARTERS</h2>
+        <!-- Category: STARTERS -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">STARTERS</h2>
           </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Chilly Potato</span>
-              <span class="font-bold text-sm text-fireYellow">₹130</span>
+          <div class="space-y-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Chilly Potato</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹130</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Honey Chilly Potato</span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Honey Chilly Potato</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Crispy Corn</span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Crispy Corn</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Manchurian <span class="text-xs text-gray-400">(Dry/Gravy)</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹150 / 170</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Manchurian <span class="text-[10px] text-gray-400 font-light">(Dry/Gravy)</span></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150 / 170</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Mushroom Chilly Latpata</span>
-              <span class="font-bold text-sm text-fireYellow">₹170</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Mushroom Chilly Latpata</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹170</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Cheese Chilly <span class="text-xs text-gray-400">(Dry/Gravy)</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹170 / 190</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Cheese Chilly <span class="text-[10px] text-gray-400 font-light">(Dry/Gravy)</span></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹170 / 190</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Paneer Hong Kong</span>
-              <span class="font-bold text-sm text-fireYellow">₹200</span>
-            </div>
-          </div>
-
-          <!-- Desserts -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">DESSERTS</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Oreo Crunch Ice Cream <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹80</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Choco Lava Cake</span>
-              <span class="font-bold text-sm text-fireYellow">₹90</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Hot Brownie</span>
-              <span class="font-bold text-sm text-fireYellow">₹100</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Hot Chocolate</span>
-              <span class="font-bold text-sm text-fireYellow">₹100</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Hot Brownie with Ice Cream <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
-            </div>
-          </div>
-
-          <!-- Hot Coffee -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">HOT COFFEE</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Espresso Shot</span>
-              <span class="font-bold text-sm text-fireYellow">₹60</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Kali Coffee</span>
-              <span class="font-bold text-sm text-fireYellow">₹70</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Cappuccino <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹100</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Café Latte <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹140</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Café Mocha</span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Hazelnut Latte</span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Irish Latte</span>
-              <span class="font-bold text-sm text-fireYellow">₹150</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Paneer Hong Kong</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹200</span>
             </div>
           </div>
         </div>
 
-        <!-- Right Column: Ice Tea, Mojitos, Cold Coffee & Shakes -->
-        <div class="space-y-4">
-          <!-- Ice Tea -->
-          <div class="wood-heading-panel p-2.5 rounded-r">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">ICE TEA</h2>
+        <!-- Category: DESSERTS -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">DESSERTS</h2>
           </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Lemon Ice Tea <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹80</span>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Oreo Crunch Ice Cream <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹80</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Blueberry Ice Tea <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹100</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Choco Lava Cake</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹90</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Watermelon Ice Tea</span>
-              <span class="font-bold text-sm text-fireYellow">₹100</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Hot Brownie</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹100</span>
             </div>
-          </div>
-
-          <!-- Mojitos -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">MOJITOS</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Sweet Lime Mojito <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹90</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Hot Chocolate</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹100</span>
             </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Virgin Mojito</span>
-              <span class="font-bold text-sm text-fireYellow">₹90</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Blueberry Mojito</span>
-              <span class="font-bold text-sm text-fireYellow">₹90</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Watermelon Mojito <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹90</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Green Apple Mojito</span>
-              <span class="font-bold text-sm text-fireYellow">₹90</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Kala Khatta Mojito <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹90</span>
-            </div>
-          </div>
-
-          <!-- Cold Coffee -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">COLD COFFEE</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Cold Coffee <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹110</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Iced Cappuccino <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹110</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Caramel Coffee</span>
-              <span class="font-bold text-sm text-fireYellow">₹120</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Iced Latte</span>
-              <span class="font-bold text-sm text-fireYellow">₹140</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Irish Cold Coffee</span>
-              <span class="font-bold text-sm text-fireYellow">₹140</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Hazelnut Cold Coffee</span>
-              <span class="font-bold text-sm text-fireYellow">₹140</span>
-            </div>
-          </div>
-
-          <!-- Shakes -->
-          <div class="wood-heading-panel p-2.5 rounded-r mt-3">
-            <h2 class="text-lg sm:text-xl font-luxury font-black text-fireYellow tracking-wider">SHAKES</h2>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Vanilla Shake</span>
-              <span class="font-bold text-sm text-fireYellow">₹100</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Strawberry Shake</span>
-              <span class="font-bold text-sm text-fireYellow">₹100</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Butterscotch Shake <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹110</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Chocolate Shake</span>
-              <span class="font-bold text-sm text-fireYellow">₹110</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Black Currant Shake</span>
-              <span class="font-bold text-sm text-fireYellow">₹110</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Oreo Shake <span class="text-fireYellow text-xs fire-pulse">☆</span></span>
-              <span class="font-bold text-sm text-fireYellow">₹140</span>
-            </div>
-            <div class="flex justify-between items-baseline p-1 hover:bg-white/5 rounded transition">
-              <span class="font-luxury font-bold text-sm text-white">Brownie Shake</span>
-              <span class="font-bold text-sm text-fireYellow">₹140</span>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Hot Brownie with Ice Cream <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
             </div>
           </div>
         </div>
+
+        <!-- Category: HOT COFFEE -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">HOT COFFEE</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Espresso Shot</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹60</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Kali Coffee</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹70</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Cappuccino <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹100</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Café Latte <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹140</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Café Mocha</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Hazelnut Latte</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Irish Latte</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹150</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: ICE TEA -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">ICE TEA</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Lemon Ice Tea <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹80</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Blueberry Ice Tea <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹100</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Watermelon Ice Tea</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹100</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: MOJITOS -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">MOJITOS</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Sweet Lime Mojito <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹90</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Virgin Mojito</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹90</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Blueberry Mojito</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹90</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Watermelon Mojito <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹90</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Green Apple Mojito</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹90</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Kala Khatta Mojito <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹90</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: COLD COFFEE -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">COLD COFFEE</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Cold Coffee <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹110</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Iced Cappuccino <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹110</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Caramel Coffee</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹120</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Iced Latte</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹140</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Irish Cold Coffee</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹140</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Hazelnut Cold Coffee</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹140</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: SHAKES -->
+        <div>
+          <div class="wood-heading-panel p-3 rounded-r mb-4">
+            <h2 class="text-base sm:text-lg font-luxury font-black text-fireYellow tracking-widest uppercase">SHAKES</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Vanilla Shake</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹100</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Strawberry Shake</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹100</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Butterscotch Shake <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹110</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Chocolate Shake</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹110</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Black Currant Shake</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹110</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Oreo Shake <i class="fa-solid fa-star text-[10px] text-fireYellow gold-sparkle-pulse ml-1"></i></span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹140</span>
+            </div>
+            <div class="flex justify-between items-baseline p-1.5 hover:bg-white/5 rounded transition">
+              <span class="font-bold text-xs sm:text-sm text-neutral-100 uppercase tracking-wide">Brownie Shake</span>
+              <div class="flex-grow border-b border-dotted border-white/10 mx-3"></div>
+              <span class="font-semibold text-xs sm:text-sm text-fireYellow">₹140</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="universal-feedback-block"></div>
 
       </div>
     </div>
 
   </main>
 
-  <!-- Navigation Bars & Integrated Feedback System (Fixed Height bottom dock) -->
-  <footer class="w-full bg-brandGrey-dark/95 border-t border-white/5 py-3 px-4 z-40 relative">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+  <!-- Navigation Bars (Fixed bottom page controls) -->
+  <footer class="w-full bg-brandGrey-dark/95 border-t border-white/5 py-3 px-4 z-40 relative select-none">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
       
       <!-- Custom Page Counter & Navigation Indicators -->
-      <div class="flex items-center gap-4">
-        <button onclick="turnPage(false)" class="p-2 border border-fireYellow/30 text-fireYellow hover:bg-fireYellow/15 active:scale-95 transition rounded-full flex items-center justify-center w-9 h-9">
+      <div class="flex items-center gap-4 mx-auto">
+        <button onclick="turnPage(false)" class="p-2 border border-fireYellow/30 text-fireYellow hover:bg-fireYellow/15 active:scale-95 transition rounded-full flex items-center justify-center w-9 h-9 shadow-fireGlow/20">
           <i class="fa-solid fa-arrow-left text-xs"></i>
         </button>
-        <span class="font-luxury text-sm tracking-widest text-gray-300">
+        <span class="font-luxury text-xs sm:text-sm tracking-[0.2em] text-gray-300">
           PAGE <span id="currentPageNum" class="text-fireYellow font-bold">1</span> / 6
         </span>
-        <button onclick="turnPage(true)" class="p-2 border border-fireYellow/30 text-fireYellow hover:bg-fireYellow/15 active:scale-95 transition rounded-full flex items-center justify-center w-9 h-9">
+        <button onclick="turnPage(true)" class="p-2 border border-fireYellow/30 text-fireYellow hover:bg-fireYellow/15 active:scale-95 transition rounded-full flex items-center justify-center w-9 h-9 shadow-fireGlow/20">
           <i class="fa-solid fa-arrow-right text-xs"></i>
         </button>
-      </div>
-
-      <!-- Compact Drawer-Style Interactive Feedback Form -->
-      <div id="feedbackContainer" class="w-full md:w-auto flex-grow max-w-lg">
-        <form id="feedbackForm" onsubmit="submitFeedback(event)" class="flex gap-2 items-center">
-          <input 
-            type="text" 
-            id="feedbackMessage" 
-            placeholder="Share feedback with Karan Digital Agency..." 
-            required
-            class="flex-grow bg-brandGrey-light/80 border border-white/10 hover:border-fireYellow/30 focus:border-fireYellow/80 focus:ring-1 focus:ring-fireYellow/50 rounded px-3 py-1.5 text-xs text-gray-200 outline-none transition"
-          />
-          <button 
-            type="submit" 
-            class="bg-fireYellow hover:bg-fireYellow-dark text-black font-semibold text-xs tracking-wider px-4 py-2 rounded transition-all duration-300 active:scale-95 whitespace-nowrap"
-          >
-            SEND FEEDBACK
-          </button>
-        </form>
       </div>
 
     </div>
   </footer>
 
-  <!-- Background Wood Texture Application -->
+  <!-- Background Wood Texture Layer -->
   <div class="fixed inset-0 grey-wood-bg -z-50 pointer-events-none opacity-40"></div>
 
-  <!-- Interactive Logic Setup -->
+  <!-- Interactive Script Logic -->
   <script>
-    // Initialize state
+    // Initialize state parameters
     let currentPage = 1;
     const totalPages = 6;
     let audioMuted = false;
     let audioCtx = null;
+    let isSparkleActive = true;
 
-    // Swipe interaction variables
+    // Swipe interface metrics
     let touchStartX = 0;
+    let touchStartY = 0;
     let touchEndX = 0;
+    let touchEndY = 0;
+
+    // Standard high quality reusable guest critique template to keep code clean and uniform
+    const feedbackTemplateHTML = `
+      <div class="mt-12 mb-6 p-5 rounded-xl border border-fireYellow/15 bg-brandGrey-light/40 backdrop-blur-sm shadow-luxuryGlow text-center max-w-md mx-auto relative overflow-hidden">
+        <div class="absolute -top-12 -left-12 w-24 h-24 bg-fireYellow/5 rounded-full blur-xl pointer-events-none"></div>
+        <div class="absolute -bottom-12 -right-12 w-24 h-24 bg-fireYellow/5 rounded-full blur-xl pointer-events-none"></div>
+        
+        <div class="flex items-center justify-center gap-2 text-fireYellow mb-2 select-none">
+          <i class="fa-solid fa-star gold-sparkle-pulse text-xs"></i>
+          <span class="font-luxury font-bold tracking-[0.3em] text-[10px] uppercase">GUEST CRITIQUE</span>
+          <i class="fa-solid fa-star gold-sparkle-pulse text-xs"></i>
+        </div>
+        <h3 class="text-xs font-luxury tracking-widest text-neutral-300 mb-4 uppercase">Email Feedback to Karan Digital Agency</h3>
+        <form class="space-y-3" onsubmit="submitFeedbackEmail(event, this)">
+          <input 
+            type="text" 
+            placeholder="YOUR NAME" 
+            required 
+            class="w-full bg-black/40 border border-white/10 focus:border-fireYellow rounded px-3 py-2 text-xs text-white placeholder-gray-500 outline-none transition font-body tracking-wider"
+          />
+          <textarea 
+            placeholder="SHARE YOUR DINING EXPERIENCE..." 
+            required 
+            rows="3" 
+            class="w-full bg-black/40 border border-white/10 focus:border-fireYellow rounded px-3 py-2 text-xs text-white placeholder-gray-500 outline-none transition resize-none font-body tracking-wider"
+          ></textarea>
+          <button 
+            type="submit" 
+            class="w-full py-2 bg-gradient-to-r from-fireYellow to-fireYellow-dark hover:brightness-110 active:scale-[0.98] transition rounded text-black font-luxury font-black text-[10px] tracking-widest uppercase shadow-fireGlow/10"
+          >
+            TRANSMIT VIA EMAIL
+          </button>
+        </form>
+      </div>
+    `;
 
     window.onload = function() {
-      // 1. Particle setup & Trigger
-      initSparkleEngine();
-      triggerConfettiExplosion();
+      // Setup feedback blocks on every scrollable menu page dynamically
+      document.querySelectorAll('.universal-feedback-block').forEach(container => {
+        container.innerHTML = feedbackTemplateHTML;
+      });
 
-      // 2. Setup Swipe Events for high-performance touch devices
+      // Launch canvas sparkles and popper structures
+      initSparkleEngine();
+      triggerPopperBurst();
+
+      // Configure multi-direction swipe detection ignoring pure vertical scrolls
       const mainContainer = document.querySelector('main');
       mainContainer.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
+        touchStartX = e.changedTouches[0].clientX;
+        touchStartY = e.changedTouches[0].clientY;
       }, { passive: true });
 
       mainContainer.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
+        touchEndX = e.changedTouches[0].clientX;
+        touchEndY = e.changedTouches[0].clientY;
         handleSwipeGesture();
       }, { passive: true });
 
-      // 3. Close Offer Modal on external clicking
+      // Dismiss dynamic modal container on outer background click
       const offerModal = document.getElementById('offerModalContainer');
       offerModal.addEventListener('click', function(e) {
         if (e.target === offerModal) {
@@ -1279,7 +1499,7 @@
         }
       });
 
-      // 4. Offer Switch Logic
+      // Special offer logic flow
       const offerBtn = document.getElementById('offerTriggerBtn');
       offerBtn.addEventListener('click', function(e) {
         e.stopPropagation(); // Avoid triggering close on outer container
@@ -1289,7 +1509,7 @@
         if (offerBtn.textContent.trim() === "REVEAL OFFER") {
           title.textContent = "NOTHING FOR TODAY!";
           title.style.color = "#FF8F00";
-          subtitle.textContent = "But worry not, fine companion! Try again tomorrow for exquisite surprises.";
+          subtitle.textContent = "But worry not, fine companion! Try again tomorrow for exquisite luxury surprises.";
           offerBtn.textContent = "TRY TOMORROW";
         } else {
           closeOfferModal();
@@ -1298,7 +1518,7 @@
 
       // Show initial modal scale effect
       setTimeout(() => {
-        document.getElementById('offerModalBox').classList.remove('scale-95');
+        document.getElementById('offerModalBox').classList.remove('scale-90');
         document.getElementById('offerModalBox').classList.add('scale-100');
       }, 50);
     };
@@ -1308,20 +1528,25 @@
       modal.classList.add('opacity-0', 'pointer-events-none');
       setTimeout(() => {
         modal.style.display = 'none';
-      }, 300);
-      // Attempt to initialize Web Audio API on first interactive click
+      }, 400);
+      
+      // Conclude falling sparkles animations as requested
+      isSparkleActive = false;
+      if (canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
       initWebAudio();
     }
 
-    /* --- PAGE TURN SYSTEM WITH 3D FLIP ANIMATIONS --- */
+    /* --- PAGE TURN SYSTEM WITH 3D BOOK ROTATIONS --- */
     function turnPage(forward) {
       if (forward && currentPage < totalPages) {
-        playASMRSound();
+        playASMRPageTurn();
         setPageClasses(currentPage, 'page-past');
         currentPage++;
         setPageClasses(currentPage, 'page-active');
       } else if (!forward && currentPage > 1) {
-        playASMRSound();
+        playASMRPageTurn();
         setPageClasses(currentPage, 'page-future');
         currentPage--;
         setPageClasses(currentPage, 'page-active');
@@ -1338,72 +1563,78 @@
     }
 
     function handleSwipeGesture() {
-      const threshold = 50; // Swipe threshold in px
-      if (touchStartX - touchEndX > threshold) {
-        // Swiped left to right (Next page)
-        turnPage(true);
-      } else if (touchEndX - touchStartX > threshold) {
-        // Swiped right to left (Previous page)
-        turnPage(false);
+      const diffX = touchStartX - touchEndX;
+      const diffY = touchStartY - touchEndY;
+      const threshold = 60; // Swipe threshold distance
+
+      // Confirm dominant horizontal movement to prevent confusion with page lists scrolling
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX > threshold) {
+          // Finger swiped from right to left -> Go to Next Page
+          turnPage(true);
+        } else if (diffX < -threshold) {
+          // Finger swiped from left to right -> Go to Previous Page
+          turnPage(false);
+        }
       }
     }
 
-    /* --- WEB AUDIO API HIGH FIDELITY ASMR GENERATION --- */
+    /* --- HIGH-DEFINITION ASMR WEB AUDIO SYNTHESIS --- */
     function initWebAudio() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
     }
 
-    function playASMRSound() {
+    function playASMRPageTurn() {
       if (audioMuted) return;
       initWebAudio();
       if (!audioCtx) return;
 
-      // Resume context if suspended (browser security rules)
+      // Resume context if browser suspended
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
       }
 
-      // ASMR White-noise based paper rustle generator
-      const bufferSize = audioCtx.sampleRate * 0.45; // ~0.45s paper swipe
+      // ASMR White-noise based paper friction generator
+      const bufferSize = audioCtx.sampleRate * 0.45; 
       const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
       const data = buffer.getChannelData(0);
 
-      // Generate soft rustle noise profile
+      // Generate noise profile simulating card sliding against card
       for (let i = 0; i < bufferSize; i++) {
         data[i] = Math.random() * 2 - 1;
       }
 
-      const noiseNode = audioCtx.createBufferSource();
-      noiseNode.buffer = buffer;
+      const noiseSource = audioCtx.createBufferSource();
+      noiseSource.buffer = buffer;
 
-      // Premium Bandpass Filter for authentic paper swish
-      const bandpass = audioCtx.createBiquadFilter();
-      bandpass.type = 'bandpass';
-      bandpass.frequency.setValueAtTime(1400, audioCtx.currentTime);
-      bandpass.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.4);
-      bandpass.Q.setValueAtTime(2.0, audioCtx.currentTime);
+      // Bandpass sweep to focus sound on light scrape frequencies
+      const bandpassFilter = audioCtx.createBiquadFilter();
+      bandpassFilter.type = 'bandpass';
+      bandpassFilter.frequency.setValueAtTime(1250, audioCtx.currentTime);
+      bandpassFilter.frequency.exponentialRampToValueAtTime(750, audioCtx.currentTime + 0.4);
+      bandpassFilter.Q.setValueAtTime(1.8, audioCtx.currentTime);
 
-      // Soft Lowpass Filter to cut dry high harshness
-      const lowpass = audioCtx.createBiquadFilter();
-      lowpass.type = 'lowpass';
-      lowpass.frequency.setValueAtTime(4500, audioCtx.currentTime);
+      // Smooth cutoff to remove piercing frequencies
+      const lowpassFilter = audioCtx.createBiquadFilter();
+      lowpassFilter.type = 'lowpass';
+      lowpassFilter.frequency.setValueAtTime(4000, audioCtx.currentTime);
 
-      // Elegant envelope amplitude scaling
-      const gainNode = audioCtx.createGain();
-      gainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.18, audioCtx.currentTime + 0.1); // Swish peaks early
-      gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.45);
+      // Custom volume envelope
+      const gainControl = audioCtx.createGain();
+      gainControl.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      gainControl.gain.linearRampToValueAtTime(0.16, audioCtx.currentTime + 0.08); // Peaks early
+      gainControl.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.45); // Gradual fade
 
-      // Setup Node Connections
-      noiseNode.connect(bandpass);
-      bandpass.connect(lowpass);
-      lowpass.connect(gainNode);
-      gainNode.connect(audioCtx.destination);
+      // Node Pipeline
+      noiseSource.connect(bandpassFilter);
+      bandpassFilter.connect(lowpassFilter);
+      lowpassFilter.connect(gainControl);
+      gainControl.connect(audioCtx.destination);
 
-      // Run
-      noiseNode.start(0);
+      // Run Synthesizer
+      noiseSource.start(0);
     }
 
     function toggleAudioMute() {
@@ -1417,36 +1648,46 @@
         btn.innerHTML = `<i class="fa-solid fa-volume-high"></i> <span class="hidden sm:inline">ASMR ON</span>`;
         btn.classList.add('text-fireYellow', 'border-fireYellow/30');
         btn.classList.remove('text-gray-500', 'border-gray-700');
-        // Test sound play instantly to confirm
-        playASMRSound();
+        // Play sample sound
+        playASMRPageTurn();
       }
     }
 
-    /* --- COMPACT INTERACTIVE FEEDBACK HANDLER --- */
-    function submitFeedback(event) {
+    /* --- EMAIL TRANSMISSION CONTROLLER --- */
+    function submitFeedbackEmail(event, form) {
       event.preventDefault();
-      const message = document.getElementById('feedbackMessage').value;
-      const mailtoLink = `mailto:karrranverma@gmail.com?subject=GRILL%20MASTERS%20Feedback&body=${encodeURIComponent(message)}`;
+      const inputs = form.querySelectorAll('input, textarea');
+      const name = inputs[0].value;
+      const comments = inputs[1].value;
       
-      // Open in system mail client
-      window.location.href = mailtoLink;
+      const emailSubject = encodeURIComponent("Grill Masters Luxury Menu Critique");
+      const emailBody = encodeURIComponent(`Grill Masters Diner Critique\n\nGuest Name: ${name}\nCritique Notes:\n${comments}`);
+      
+      // Trigger native desktop/mobile mail client
+      window.location.href = `mailto:karrranverma@gmail.com?subject=${emailSubject}&body=${emailBody}`;
 
-      // Dynamic feedback UI response
-      const form = document.getElementById('feedbackForm');
-      const originalHTML = form.innerHTML;
-      form.innerHTML = `
-        <div class="flex items-center gap-2 text-fireYellow text-xs font-luxury tracking-widest animate-pulse py-1">
-          <i class="fa-solid fa-check-circle"></i> THANK YOU! SENDING VIA EMAIL CLIENT...
-        </div>
-      `;
+      // Visual response feedback
+      const submitBtn = form.querySelector('button');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = "TRANSMITTING VIA MAIL CLIENT...";
+      submitBtn.style.background = "#FFB300";
+      submitBtn.style.color = "#000000";
 
       setTimeout(() => {
-        form.innerHTML = originalHTML;
-        document.getElementById('feedbackMessage').value = '';
-      }, 4000);
+        submitBtn.textContent = "CRITIQUE REVEALED";
+        submitBtn.style.background = "#22C55E"; // Clean green confirmation
+        submitBtn.style.color = "#FFFFFF";
+      }, 1500);
+
+      setTimeout(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.style.background = "";
+        submitBtn.style.color = "";
+        form.reset();
+      }, 5000);
     }
 
-    /* --- CANVAS PARTICLES ENGINE (SPARKLES & CONFETTI POPPERS) --- */
+    /* --- CANVAS ENGINE: GOLD FALLING SPARKLES & CONFLICT PARTY POPPERS --- */
     let canvas, ctx;
     let particles = [];
 
@@ -1455,7 +1696,7 @@
       ctx = canvas.getContext('2d');
       resizeCanvas();
       window.addEventListener('resize', resizeCanvas);
-      animateParticles();
+      animateEngine();
     }
 
     function resizeCanvas() {
@@ -1467,18 +1708,18 @@
       constructor(x, y, isConfetti = false) {
         this.x = x;
         this.y = y;
-        this.size = isConfetti ? Math.random() * 8 + 4 : Math.random() * 4 + 1;
-        this.speedX = isConfetti ? Math.random() * 8 - 4 : Math.random() * 2 - 1;
-        this.speedY = isConfetti ? Math.random() * -12 - 4 : Math.random() * 2 + 1;
-        this.gravity = isConfetti ? 0.25 : 0.02;
+        this.size = isConfetti ? Math.random() * 8 + 4 : Math.random() * 3.5 + 1;
+        this.speedX = isConfetti ? Math.random() * 10 - 5 : Math.random() * 2 - 1;
+        this.speedY = isConfetti ? Math.random() * -14 - 4 : Math.random() * 2.5 + 1;
+        this.gravity = isConfetti ? 0.28 : 0.02;
         this.color = isConfetti 
-          ? `hsl(${Math.random() * 60 + 35}, 100%, 60%)` // Shimmery orange/yellow
-          : `rgba(255, 179, 0, ${Math.random() * 0.7 + 0.3})`; // Premium golden sparkle
-        this.decay = Math.random() * 0.015 + 0.005;
+          ? `hsl(${Math.random() * 55 + 30}, 100%, 60%)` // Multi-hue celebration yellow, amber & orange
+          : `rgba(255, 179, 0, ${Math.random() * 0.75 + 0.25})`; // Luxury golden glow sparkle
+        this.decay = Math.random() * 0.012 + 0.006;
         this.life = 1.0;
         this.isConfetti = isConfetti;
         this.rotation = Math.random() * 360;
-        this.rotationSpeed = Math.random() * 10 - 5;
+        this.rotationSpeed = Math.random() * 12 - 6;
       }
 
       update() {
@@ -1497,19 +1738,19 @@
         ctx.fillStyle = this.color;
 
         if (this.isConfetti) {
-          // Render fancy rectangular confetti flakes
+          // Multi-hue party popper rectangular flakes
           ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size / 2);
         } else {
-          // Elegant star-like sparkle shapes
+          // Premium golden star-shaped sparkles
           ctx.beginPath();
           ctx.moveTo(0, -this.size * 2);
-          ctx.lineTo(this.size * 0.5, -this.size * 0.5);
+          ctx.lineTo(this.size * 0.4, -this.size * 0.4);
           ctx.lineTo(this.size * 2, 0);
-          ctx.lineTo(this.size * 0.5, this.size * 0.5);
+          ctx.lineTo(this.size * 0.4, this.size * 0.4);
           ctx.lineTo(0, this.size * 2);
-          ctx.lineTo(-this.size * 0.5, this.size * 0.5);
+          ctx.lineTo(-this.size * 0.4, this.size * 0.4);
           ctx.lineTo(-this.size * 2, 0);
-          ctx.lineTo(-this.size * 0.5, -this.size * 0.5);
+          ctx.lineTo(-this.size * 0.4, -this.size * 0.4);
           ctx.closePath();
           ctx.fill();
         }
@@ -1517,25 +1758,33 @@
       }
     }
 
-    function triggerConfettiExplosion() {
-      const centerX = window.innerWidth / 2;
+    function triggerPopperBurst() {
       const bottomY = window.innerHeight;
 
-      // Burst from left & right corners like actual party poppers
-      for (let i = 0; i < 45; i++) {
-        particles.push(new Particle(20, bottomY - 50, true));
-        particles.push(new Particle(window.innerWidth - 20, bottomY - 50, true));
+      // Burst poppers simultaneously from bottom corners
+      for (let i = 0; i < 50; i++) {
+        particles.push(new Particle(15, bottomY - 30, true));
+        particles.push(new Particle(window.innerWidth - 15, bottomY - 30, true));
       }
 
-      // Add gentle falling sparkles from top down
-      setInterval(() => {
-        if (particles.length < 80) {
+      // Automatically generate falling sparkles from sky as long as modal stays active
+      const sparkleSpawner = setInterval(() => {
+        if (!isSparkleActive) {
+          clearInterval(sparkleSpawner);
+          return;
+        }
+        if (particles.length < 100) {
           particles.push(new Particle(Math.random() * window.innerWidth, -20, false));
         }
-      }, 100);
+      }, 120);
     }
 
-    function animateParticles() {
+    function animateEngine() {
+      if (!isSparkleActive && particles.length === 0) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        return; // Complete pause to protect device loop cycle
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
@@ -1545,7 +1794,7 @@
           particles.splice(i, 1);
         }
       }
-      requestAnimationFrame(animateParticles);
+      requestAnimationFrame(animateEngine);
     }
   </script>
 </body>
